@@ -19,6 +19,23 @@ function modelLoaded(){
     console.log("Model Loaded?")
 }
 
+function gotPoses(results){
+    if(results.length > 0){
+        console.log(results);
+        leftWristX = results[0].pose.leftWrist.x;
+        leftWristY = results[0].pose.leftWrist.y;
+
+        rightWristX = results[0].pose.rightWrist.x;
+        rightWristY = results[0].pose.rightWrist.y;
+
+        scoreLeftWrist = results[0].pose.keypoints[9].score;
+        scoreRightWrist = results[0].pose.keypoints[10].score;
+
+        console.log("Left Wrist X = "+leftWristX+", left Wrist Y= "+leftWristY+", Left Wrist Score= "+scoreLeftWrist);
+        console.log("Right Wrist X = "+rightWristX+", Right Wrist Y= "+rightWristY+", Right Wrist Score= "+scoreRightWrist);
+    }
+}
+
 function draw(){
     Image(video, 0, 0, 600, 500, )
 }
