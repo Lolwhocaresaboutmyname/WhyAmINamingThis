@@ -1,16 +1,19 @@
 song="";
+song2="";
 leftWristX = "";
 leftWristY = "";
 rightWristX = "";
 rightWristY = "";
 scoreLeftWrist = "";
 scoreRightWrist= "";
+songStatus="";
+song2Status="";
 
 function setup(){
     canvas = createCanvas(600, 500);
     canvas.center();
     video = createCapture(VIDEO);
-    video.hide();
+    video.hide()
     poseNet = ml5.poseNet(video, modelLoaded);
     poseNet.on('pose', gotPoses);
 }
@@ -37,7 +40,29 @@ function gotPoses(results){
 }
 
 function draw(){
-    Image(video, 0, 0, 600, 500, )
+    image(video, 0, 0, 600, 500);
+    stroke("red");
+    fill("red");
+    songStatus = song.isPlaying();
+    song2Status = song2.isPlaying();
+
+    if(scoreLeftWrist>scoreRightWrist){
+        circle(leftWristX, leftWristY, 20);
+        song2.stop();
+        if(songStatus == false){
+            song.play()
+            document.getElementById("?").innerHTML = "Song playing is - Weird Harry Potter";
+        }
+    }
+
+    if(scoreRightWrist>scoreLeftWrist){
+        circle(RightWristX, RightWristY, 20);
+        song.stop();
+        if(song2Status == false){
+            song2.play()
+            document.getElementById("?").innerHTML = "Song playing is - Weird Peter Pan";
+        }
+    }
 }
 
 function preload(){
